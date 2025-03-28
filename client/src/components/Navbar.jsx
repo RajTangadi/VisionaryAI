@@ -9,19 +9,21 @@ const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <nav className="p-4 shadow-md flex justify-between items-center bg-background">
-      <div className="text-xl font-semibold pl-10">
+    <nav className="p-3 shadow-md flex justify-between items-center bg-background">
+      <div className="font-bold pl-10 h-12">
         <Link to="/">
           <img
-            src="/images.png"
+            src="/image1.png"
             alt="logo"
-            className="w-40 h-15 object-contain mix-blend-multiply"
+            className="w-35  h-auto object-contain mix-blend-multiply"
           />
         </Link>
       </div>
       <div className="flex items-center gap-4">
         <Link to="/create">
-          <Button variant="default" className="cursor-pointer">Create</Button>
+          <Button variant="default" className="cursor-pointer">
+            Create
+          </Button>
         </Link>
         <Link to={"https://github.com/RajTangadi/VisionaryAI"} target="_blank">
           <FaGithub className="w-6 h-6" />
@@ -29,7 +31,11 @@ const Navbar = () => {
         {/* <a href="https://github.com" target="_blank" rel="noopener noreferrer">
           <FaGithub className="w-6 h-6" />
         </a> */}
-        <Button variant="ghost" onClick={toggleTheme} className="cursor-pointer">
+        <Button
+          variant="ghost"
+          onClick={toggleTheme}
+          className="cursor-pointer"
+        >
           {theme === "light" ? (
             <Moon className="w-5 h-5" />
           ) : (

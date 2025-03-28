@@ -3,19 +3,33 @@ import { Button } from "@/components/ui/button";
 import { Sun, Moon } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { ThemeContext } from "../context/ThemeContext";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <nav className="p-4 shadow-md flex justify-between items-center bg-background">
-      <div className="text-xl font-semibold pl-10">Brand</div>
+      <div className="text-xl font-semibold pl-10">
+        <Link to="/">
+          <img
+            src="/images.png"
+            alt="logo"
+            className="w-40 h-15 object-contain mix-blend-multiply"
+          />
+        </Link>
+      </div>
       <div className="flex items-center gap-4">
-        <Button variant="default">Create</Button>
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+        <Link to="/create">
+          <Button variant="default" className="cursor-pointer">Create</Button>
+        </Link>
+        <Link to={"https://github.com/RajTangadi/VisionaryAI"} target="_blank">
           <FaGithub className="w-6 h-6" />
-        </a>
-        <Button variant="ghost" onClick={toggleTheme}>
+        </Link>
+        {/* <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+          <FaGithub className="w-6 h-6" />
+        </a> */}
+        <Button variant="ghost" onClick={toggleTheme} className="cursor-pointer">
           {theme === "light" ? (
             <Moon className="w-5 h-5" />
           ) : (

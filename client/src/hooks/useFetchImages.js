@@ -14,6 +14,7 @@ const useFetchImages = () => {
         console.log(response);
       } catch (err) {
         setError(err.response?.data?.error || "Failed to fetch images");
+        setLoading(false);
       } finally {
         setLoading(false);
       }

@@ -1,7 +1,43 @@
 import ImageGrid from "@/components/ImageGrid";
 import TypeAnimation1 from "@/components/TypeAnimation1";
+import useFetchImages from "@/hooks/useFetchImages";
+import { useEffect, useState } from "react";
 
 const Home = () => {
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+  const { data,loading, error } = useFetchImages();
+
+  // Update filtered data whenever search term or data changes
+  useEffect(() => {
+    handleSearch();
+  }, [data, search]);
+
+  const handleSearch = () => {
+    if (!data) return;
+
+    if (!search.trim()) {
+      // If search is empty, show all images
+      setFilteredData(data);
+      return;
+    }
+    // Convert search term to lowercase for case-insensitive comparison
+    const searchTerm = search.toLowerCase();
+
+    // Filter data based on prompt or username containing the search term
+    const filtered = data?.filter(
+      (item) =>
+        (item.userName && item.userName.toLowerCase().includes(searchTerm)) ||
+        (item.prompt && item.prompt.toLowerCase().includes(searchTerm))
+    );
+
+    setFilteredData(filtered);
+  };
+
+  const handleSearchInput = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <>
       <div className="p-15 w-[75%] mx-auto">
@@ -18,13 +54,31 @@ const Home = () => {
             type="text"
             placeholder="Search Image"
             className="w-full bg-white text-black p-2"
+            value={search}
+            onChange={handleSearchInput}
           />
           <p className="font-semibold mt-4 text-lg text-gray-500">
-            Showing result for{" "}
-            <span className="text-black pl-1">Post image</span>{" "}
+            {search.trim() ? (
+              <>
+                Showing results for
+                <span className="text-black pl-1">"{search}"</span>
+                <span className="text-gray-400 pl-1">
+                  ({filteredData?.length || 0}
+                  {filteredData?.length === 1 ? " result" : " results"})
+                </span>
+              </>
+            ) : (
+              <>
+                Showing all images
+                <span className="text-gray-400 pl-1">
+                  ({filteredData?.length || 0}{" "}
+                  {filteredData?.length === 1 ? "image" : "images"})
+                </span>
+              </>
+            )}{" "}
           </p>
         </div>
-        <ImageGrid />
+        <ImageGrid data={filteredData} loading={loading} error={error}/>
       </div>
     </>
   );

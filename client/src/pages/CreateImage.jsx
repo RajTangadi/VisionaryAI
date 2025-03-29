@@ -10,12 +10,37 @@ const CreateImage = () => {
   const [images, setImages] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [userNameError, setUserNameError] = useState("");
+
+  const validateUsername = (username) => {
+    // Check if username starts with an alphabetical letter
+    const startsWithAlphabet = /^[a-zA-Z]/.test(username);
+
+    if (!startsWithAlphabet && username.length > 0) {
+      setUserNameError("Username must start with an alphabetical letter");
+      return false;
+    }
+
+    setUserNameError("");
+    return true;
+  };
+
+  const handleUserNameChange = (e) => {
+    const newUsername = e.target.value;
+    setUserName(newUsername);
+    validateUsername(newUsername);
+  };
 
   const handleGenerate = async () => {
     if (!userName || !prompt) {
       setError("User name and prompt are required!");
       return;
     }
+
+    if (!validateUsername(userName)) {
+      return;
+    }
+
     setError("");
     setLoading(true);
     setImages(null);
@@ -54,10 +79,15 @@ const CreateImage = () => {
           <input
             type="text"
             placeholder="Eg. Rayan"
-            className="w-full bg-white text-black p-2"
+            className={`w-full bg-white text-black p-2 ${
+              userNameError ? "border-2 border-red-500" : ""
+            }`}
             value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={handleUserNameChange}
           />
+          {userNameError && (
+            <p className="text-red-500 mt-1 text-sm">{userNameError}</p>
+          )}
           <h3 className="pt-5 pb-3 font-semibold">Prompt</h3>
           <input
             type="text"

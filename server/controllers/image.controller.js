@@ -75,7 +75,7 @@ export const generateImage = async (req, res) => {
 
 export const getAllImages = async (req, res) => {
   try {
-    const images = await Image.find();
+    const images = await Image.find().sort({ createdAt: -1 }).limit(20);
     res.json(images);
   } catch (error) {
     res.status(500).json({ error: error.message });

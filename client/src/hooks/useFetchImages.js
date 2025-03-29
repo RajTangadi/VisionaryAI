@@ -11,7 +11,6 @@ const useFetchImages = () => {
       try {
         const response = await axios.get("/api/images");
         setData(response.data); 
-        console.log(response);
       } catch (err) {
         setError(err.response?.data?.error || "Failed to fetch images");
         setLoading(false);

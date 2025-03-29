@@ -13,7 +13,6 @@ export const generateImage = async (req, res) => {
       return res.status(400).json({ error: "Missing userName or prompt" });
     }
 
-    console.log("Checking prompt limit for user:", userName);
 
     // Check how many images the user has already generated
     const userImagesCount = await Image.countDocuments({ userName });
@@ -24,7 +23,6 @@ export const generateImage = async (req, res) => {
         .json({ error: "You have reached the limit of 3 prompts" });
     }
 
-    console.log("Generating image with prompt:", prompt);
     // Generate Image using Together AI
     const response = await together.images.create({
       model: "black-forest-labs/FLUX.1-schnell-Free",
@@ -37,7 +35,6 @@ export const generateImage = async (req, res) => {
       stop: [],
     });
 
-    // console.log(response);
 
     if (!response.data || !response.data[0]?.b64_json) {
       throw new Error("Image generation failed from Together AI");
@@ -45,7 +42,6 @@ export const generateImage = async (req, res) => {
 
     const base64Image = `data:image/png;base64,${response.data[0].b64_json}`;
 
-    // console.log(base64Image);
     // Upload to Cloudinary
     const cloudinaryResult = await cloudinary.uploader.upload(base64Image, {
       folder: "generated_images",
@@ -65,7 +61,6 @@ export const generateImage = async (req, res) => {
       data: newImage,
     });
   } catch (error) {
-    // console.error("Error:", error);
     res.status(500).json({
       error: "Image generation or upload failed",
       details: error.message,

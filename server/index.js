@@ -13,7 +13,7 @@ const PORT = 4000;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: process.env.FRONTEND_URL,
     methods: ["POST", "GET"],
     credentials: true,
   })
@@ -24,5 +24,4 @@ app.use("/api/images", imageRoutes);
 
 app.listen(PORT, () => {
   connectDB();
-  console.log(`Server is running on port ${PORT}`);
 });

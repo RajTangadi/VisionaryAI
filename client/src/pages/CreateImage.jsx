@@ -52,7 +52,7 @@ const CreateImage = () => {
       setImages(response.data.data);
       setUserName("");
       setPrompt("");
-      console.log(images);
+    
     } catch (err) {
       setError(err.response?.data?.error || "Image generation failed.");
     }

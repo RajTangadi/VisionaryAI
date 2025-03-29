@@ -21,25 +21,22 @@ const Navbar = () => {
       </div>
       <div className="flex items-center gap-4">
         <Link to="/create">
-          <Button variant="default" className="cursor-pointer">
+          <Button variant="default" className="cursor-pointer ">
             Create
           </Button>
         </Link>
         <Link to={"https://github.com/RajTangadi/VisionaryAI"} target="_blank">
-          <FaGithub className="w-6 h-6" />
+          <FaGithub className="w-6 h-6 text-black" />
         </Link>
-        {/* <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-          <FaGithub className="w-6 h-6" />
-        </a> */}
         <Button
           variant="ghost"
           onClick={toggleTheme}
           className="cursor-pointer"
         >
           {theme === "light" ? (
-            <Moon className="w-5 h-5" />
+            <Moon className="w-5 h-5 " />
           ) : (
-            <Sun className="w-5 h-5" />
+            <Sun className="w-5 h-5 text-black" />
           )}
         </Button>
       </div>

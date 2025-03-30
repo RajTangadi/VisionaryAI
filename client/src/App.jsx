@@ -1,7 +1,8 @@
-import Navbar from "./components/Navbar";
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import CreateImage from "./pages/CreateImage";
-import Home from "./pages/Home";
+import Navbar from "./components/Navbar";
+const CreateImage = lazy(() => import("./pages/CreateImage"));
+const Home = lazy(() => import("./pages/Home"));
 
 function App() {
   return (
@@ -9,10 +10,12 @@ function App() {
       <Router>
         <Navbar />
         <div className="p-4">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/create" element={<CreateImage />} />
-          </Routes>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/create" element={<CreateImage />} />
+            </Routes>
+          </Suspense>
         </div>
       </Router>
     </>

@@ -4,6 +4,8 @@ import axios from "axios";
 import { Loader2, Sparkles } from "lucide-react";
 import { useState } from "react";
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
 const CreateImage = () => {
   const [userName, setUserName] = useState("");
   const [prompt, setPrompt] = useState("");
@@ -45,14 +47,13 @@ const CreateImage = () => {
     setLoading(true);
     setImages(null);
     try {
-      const response = await axios.post("/api/images/generate", {
+      const response = await axios.post(`${API_BASE_URL}/api/images/generate`, {
         userName,
         prompt,
       });
       setImages(response.data.data);
       setUserName("");
       setPrompt("");
-    
     } catch (err) {
       setError(err.response?.data?.error || "Image generation failed.");
     }

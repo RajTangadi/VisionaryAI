@@ -26,7 +26,7 @@ const Navbar = () => {
       </div>
       
       <div className="md:hidden flex items-center pr-4">
-        <button onClick={toggleMenu} className="text-2xl focus:outline-none">
+        <button onClick={toggleMenu} className="text-2xl focus:outline-none text-black">
           {isOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>

@@ -97,7 +97,7 @@ const ImageGrid = ({ data, loading, error }) => {
                     {/* Download Button */}
                     <Button
                       variant="ghost"
-                      className="text-white p-2"
+                      className="text-white p-2 cursor-pointer"
                       onClick={() =>
                         handleDownload(image.imageUrl, image.prompt)
                       }

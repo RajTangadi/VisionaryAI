@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { Loader2, Sparkles } from "lucide-react";
 import { useState } from "react";
+import { Slide, toast } from "react-toastify";
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -49,10 +50,32 @@ const CreateImage = () => {
         prompt,
       });
       setImages(response.data.data);
+      toast.success("Image Generated successfully", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
       setUserName("");
       setPrompt("");
     } catch (err) {
       setError(err.response?.data?.error || "Image generation failed.");
+      toast.error('Image generation failed', {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+        });
     }
 
     setLoading(false);

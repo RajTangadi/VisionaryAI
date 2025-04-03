@@ -20,7 +20,7 @@ const Navbar = () => {
           <img
             src="/image1.png"
             alt="logo"
-            className="w-32 h-auto object-contain mix-blend-multiply"
+            className="w-32 h-auto pt-5 object-contain mix-blend-multiply"
           />
         </Link>
       </div>

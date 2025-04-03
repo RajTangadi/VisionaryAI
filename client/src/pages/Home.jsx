@@ -35,7 +35,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="p-5 w-full max-w-5xl mx-auto">
+      <div className="p-5 w-full max-w-5xl mx-auto lg:max-w-7xl">
         <div className="mt-10 mx-auto text-center">
           {/* Show animation only on desktop and higher, else show text */}
           <div className="hidden lg:block">
@@ -75,7 +75,8 @@ const Home = () => {
               <>
                 Showing all images
                 <span className="text-gray-400 pl-1">
-                  ({filteredData?.length || 0} {filteredData?.length === 1 ? "image" : "images"})
+                  ({filteredData?.length || 0}{" "}
+                  {filteredData?.length === 1 ? "image" : "images"})
                 </span>
               </>
             )}
